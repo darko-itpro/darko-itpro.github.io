@@ -3,12 +3,12 @@
 ## My training projects 👨‍🏫
 The following links are projects frameworks I use as training material.
 
-### Python, basics
+### Python, basics 🐍
  * [Python, fundamentals](https://github.com/darko-itpro/formation-Python_fondamentaux): training 
    material for a Python fundamentals training (main link is in french, the project is in french 
    and english).
 
-### Python, advanced
+### Python, advanced 🐍
  * [Python, advanced - Generalities](https://github.com/darko-itpro/formation-Python_perfectionnement_bases): 
    First step toward advanced usage of Python (main link is in french, the project is in french and 
    english).
