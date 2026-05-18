@@ -1,0 +1,38 @@
+---
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'en' | 'fr';
+}
+
+const {
+  title = 'Darko — Developer',
+  description = 'Freelance developer · Wagtail · Django · Astro',
+  lang = (Astro.currentLocale as 'en' | 'fr') ?? 'en',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang} class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- Alternate hreflang for SEO -->
+    <link rel="alternate" hreflang="en" href={Astro.site} />
+    <link rel="alternate" hreflang="fr" href={new URL('/fr/', Astro.site)} />
+  </head>
+  <body class="min-h-screen flex flex-col font-mono">
+    <Nav lang={lang} />
+    <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-12">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog-en'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function formatDate(d: Date) {
+  return d.toISOString().slice(0, 10);
+}
+---
+
+<BaseLayout title="Blog — Darko" description="Articles on Python, Django, Wagtail and Astro." lang="en">
+  <p class="text-xs text-neutral-400 mb-6">
+    <span class="text-neutral-500">~/darko</span>
+    <span class="text-amber-600 ml-1">❯ cat blog.log</span>
+  </p>
+
+  <ul class="divide-y divide-neutral-100 dark:divide-neutral-800">
+    {posts.map(post => (
+      <li>
+        <a href={getRelativeLocaleUrl('en', `/blog/${post.id}/`)}
+           class="flex flex-col gap-0.5 py-3 group hover:pl-2 transition-all duration-150">
+          <span class="text-xs text-neutral-300 dark:text-neutral-600">
+            [{formatDate(post.data.date)}]
+          </span>
+          <span class="text-sm text-neutral-700 dark:text-neutral-300 group-hover:text-amber-600 transition-colors leading-snug">
+            {post.data.title}
+          </span>
+          <span class="text-xs text-neutral-400">{post.data.description}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>

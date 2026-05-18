@@ -1,0 +1,53 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { NAV_LINKS } from '../config';
+
+interface Props {
+  lang: 'en' | 'fr';
+}
+
+const { lang } = Astro.props;
+const otherLocale = lang === 'fr' ? 'en' : 'fr';
+
+// Strip locale prefix to get the bare path for the toggle URL
+const rawPath    = Astro.url.pathname;
+const barePath   = rawPath.startsWith('/fr') ? rawPath.slice(3) || '/' : rawPath;
+const toggleUrl  = getRelativeLocaleUrl(otherLocale, barePath);
+
+const links = NAV_LINKS[lang];
+---
+
+<header class="border-b border-neutral-200 dark:border-neutral-800">
+  <nav class="max-w-3xl mx-auto px-6 py-3 flex items-center gap-6">
+
+    <a href={getRelativeLocaleUrl(lang, '/')}
+       class="text-amber-600 text-sm font-medium hover:text-amber-500 transition-colors">
+      ~/darko
+    </a>
+
+    <div class="flex gap-5 ml-auto items-center">
+      {links.map(link => (
+        <a href={link.href}
+           class="text-xs text-neutral-500 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-500 transition-colors">
+          {link.label}
+        </a>
+      ))}
+
+      <!-- Language toggle -->
+      <div class="flex items-center gap-1 ml-2 pl-4 border-l border-neutral-200 dark:border-neutral-800">
+        {lang === 'en' ? (
+          <span class="text-xs text-amber-600 font-medium">EN</span>
+        ) : (
+          <a href={toggleUrl} class="text-xs text-neutral-400 hover:text-amber-600 transition-colors">EN</a>
+        )}
+        <span class="text-neutral-300 dark:text-neutral-700 text-xs">|</span>
+        {lang === 'fr' ? (
+          <span class="text-xs text-amber-600 font-medium">FR</span>
+        ) : (
+          <a href={toggleUrl} class="text-xs text-neutral-400 hover:text-amber-600 transition-colors">FR</a>
+        )}
+      </div>
+    </div>
+
+  </nav>
+</header>

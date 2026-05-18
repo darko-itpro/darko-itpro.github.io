@@ -1,0 +1,39 @@
+---
+import { SITE, BIO } from '../config';
+
+interface Props {
+  lang: 'en' | 'fr';
+}
+const { lang } = Astro.props;
+const bio = BIO[lang];
+---
+
+<section class="mb-14">
+  <p class="text-xs text-neutral-400 mb-2">
+    <span class="text-neutral-500">~/darko</span>
+    <span class="text-amber-600 ml-1">❯</span>
+    <span class="text-amber-500 ml-1">whoami</span>
+  </p>
+
+  <div class="pl-4 border-l-2 border-amber-500">
+    <h1 class="text-2xl font-medium text-neutral-900 dark:text-neutral-100 tracking-tight">
+      {SITE.name}
+    </h1>
+    <p class="text-sm text-amber-600 mt-1">{bio.tagline}</p>
+    <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-3 leading-relaxed max-w-lg">
+      {bio.description}
+    </p>
+
+    <div class="flex gap-5 mt-5 text-xs text-neutral-400">
+      <a href={SITE.github} target="_blank" rel="noopener"
+         class="hover:text-amber-600 transition-colors flex items-center gap-1">
+        ↗ github
+      </a>
+      <a href={SITE.linkedin} target="_blank" rel="noopener"
+         class="hover:text-amber-600 transition-colors flex items-center gap-1">
+        ↗ linkedin
+      </a>
+      <span>{SITE.location}</span>
+    </div>
+  </div>
+</section>

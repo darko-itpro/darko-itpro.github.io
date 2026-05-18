@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ProjectList from '../../components/ProjectList.astro';
+import BlogList from '../../components/BlogList.astro';
+---
+
+<BaseLayout lang="fr" title="Darko — Développeur">
+  <Hero lang="fr" />
+  <ProjectList lang="fr" />
+  <BlogList lang="fr" limit={3} />
+</BaseLayout>
