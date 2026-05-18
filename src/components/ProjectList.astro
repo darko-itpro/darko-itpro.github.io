@@ -15,8 +15,8 @@ const projects = (await getCollection('projects'))
 ---
 
 <section class="mb-14">
-  <p class="text-xs text-neutral-400 mb-3">
-    <span class="text-neutral-500">~/darko</span>
+  <p class="text-xs text-neutral-500 mb-3">
+    <span class="text-neutral-600">~/darko</span>
     <span class="text-amber-600 ml-1">{label.cmd}</span>
   </p>
 
@@ -31,17 +31,17 @@ const projects = (await getCollection('projects'))
            target="_blank"
            rel="noopener"
            class="flex items-baseline gap-3 py-2 group hover:pl-2 transition-all duration-150">
-          <span class="text-xs text-neutral-300 dark:text-neutral-600 min-w-[90px] shrink-0">
+          <span class="text-xs text-neutral-400 dark:text-neutral-600 min-w-[90px] shrink-0">
             drwxr-xr-x
           </span>
           <span class="text-sm text-amber-500 group-hover:text-amber-600 transition-colors flex-1">
             {project.data.title}/
           </span>
-          <span class="text-xs text-neutral-300 dark:text-neutral-600 shrink-0">
+          <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">
             docs ↗
           </span>
         </a>
-        <p class="text-xs text-neutral-400 pl-[102px] pb-2 leading-relaxed">
+        <p class="text-xs text-neutral-500 pl-[102px] pb-2 leading-relaxed">
           {project.data.description}
         </p>
       </li>

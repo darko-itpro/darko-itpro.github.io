@@ -23,8 +23,8 @@ function formatDate(d: Date) {
 ---
 
 <section class="mb-14">
-  <p class="text-xs text-neutral-400 mb-3">
-    <span class="text-neutral-500">~/darko</span>
+  <p class="text-xs text-neutral-500 mb-3">
+    <span class="text-neutral-600">~/darko</span>
     <span class="text-amber-600 ml-1">{label.cmd}</span>
   </p>
 
@@ -33,7 +33,7 @@ function formatDate(d: Date) {
       <li>
         <a href={getRelativeLocaleUrl(lang, `/blog/${post.id}/`)}
            class="flex flex-col gap-0.5 py-2.5 group hover:pl-2 transition-all duration-150">
-          <span class="text-xs text-neutral-300 dark:text-neutral-600">
+          <span class="text-xs text-neutral-400 dark:text-neutral-500">
             [{formatDate(post.data.date)}]
           </span>
           <span class="text-sm text-neutral-700 dark:text-neutral-300 group-hover:text-amber-600 transition-colors leading-snug">
@@ -45,7 +45,7 @@ function formatDate(d: Date) {
   </ul>
 
   <a href={getRelativeLocaleUrl(lang, '/blog/')}
-     class="inline-block mt-3 text-xs text-neutral-400 hover:text-amber-600 transition-colors">
+     class="inline-block mt-3 text-xs text-neutral-500 hover:text-amber-600 transition-colors">
     {label.all}
   </a>
 </section>
