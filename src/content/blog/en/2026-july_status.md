@@ -2,7 +2,7 @@
 title: "News from July 4th, 2026"
 date: 2026-07-04
 description: >
-  Le dernier mois de formations m'a fait m'interroger sur la structure des projets de démo et en particulier l'organisation pour du packaging.
+  The past month of training has made me think about the structure of demo projects, and in particular, how to organize them for packaging.
 tags: [Python, packaging, uv, venv, pip]
 ---
 
