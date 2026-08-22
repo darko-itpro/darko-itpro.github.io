@@ -1,0 +1,19 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+---
+
+<div class="border border-mchiato-surface0 rounded-md overflow-hidden bg-mchiato-mantle/40">
+  <div class="flex items-center gap-2 px-4 py-2 bg-mchiato-mantle border-b border-mchiato-surface0">
+    <span class="w-2.5 h-2.5 rounded-full bg-mchiato-red"></span>
+    <span class="w-2.5 h-2.5 rounded-full bg-mchiato-yellow"></span>
+    <span class="w-2.5 h-2.5 rounded-full bg-mchiato-green"></span>
+    {title && <span class="ml-3 text-xs text-mchiato-overlay1">{title}</span>}
+  </div>
+  <div class="p-6">
+    <slot />
+  </div>
+</div>

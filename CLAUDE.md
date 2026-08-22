@@ -41,25 +41,45 @@ All personal info (name, GitHub, LinkedIn, bio texts) lives in `src/config.ts`.
 NEVER hardcode these values in components — always import from config.
 
 ## Design System — Terminal Aesthetic
-The visual language mimics a terminal session:
+The visual language mimics a terminal session, themed with **Catppuccin Macchiato**.
+The site is **dark-only** — there is no light mode and no theme toggle. Never reintroduce
+`dark:` variants or a `darkMode` config; there is exactly one visual mode.
 - Font: `font-mono` everywhere — no sans-serif in page content
-- Accent color: amber (`text-amber-600`, `border-amber-500`) for prompts and highlights
+- Colors: the full Catppuccin Macchiato palette is registered in `tailwind.config.cjs`
+  under `theme.extend.colors.mchiato.*` (e.g. `bg-mchiato-base`, `text-mchiato-peach`).
+  Use these tokens, not Tailwind's built-in `neutral-*`/`amber-*`/etc. palettes.
+- Accent color: peach (`text-mchiato-peach`, `border-mchiato-peach`) for prompts,
+  highlights, active nav state, and hover states
 - Section headers appear as shell commands: `❯ whoami`, `❯ ls -la ./projects/`
-- Nav links use `./section` convention
-- Borders are thin (`border border-neutral-200 dark:border-neutral-800`), no shadows
+- Nav links use `./section` convention; links whose `href` points off-site are prefixed
+  with `↗` (see `Nav.astro`) to signal they leave the site
+- Borders use `border-mchiato-surface0` (or `surface1` for tag chips), no shadows
 - Interactive items shift on hover with `hover:pl-2 transition-all` — no button-style effects
+- Page content is wrapped once in `<TerminalWindow>` (in `BaseLayout.astro`) — a bordered
+  frame with a red/yellow/green traffic-light title bar — treating the whole page as one
+  terminal session. Don't nest additional `<TerminalWindow>`s inside individual sections.
+- A blinking cursor uses the `.cursor-blink` utility class (defined in `global.css`,
+  paired with `text-mchiato-peach`) — this is the one cursor-animation mechanism site-wide;
+  don't reach for `animate-pulse` for cursor glyphs. A CSS-only typing effect
+  (`.animate-typing`, also in `global.css`) is used for Hero's name reveal.
 
 ## Content Collections
-Projects and blog posts use Astro Content Collections (defined in `src/content/config.ts`):
+Projects, trainings, and blog posts use Astro Content Collections (defined in
+`src/content.config.ts`) and are all localized the same way — separate `en`/`fr`
+subfolders, each loaded as its own `<name>-en`/`<name>-fr` collection:
 
 ```
-src/content/projects/<slug>.md     # one file per project
+src/content/projects/en/<slug>.md  # EN projects
+src/content/projects/fr/<slug>.md  # FR projects
 src/content/blog/en/<slug>.md      # EN blog posts
 src/content/blog/fr/<slug>.md      # FR blog posts
+src/content/trainings/en/<slug>.md # EN trainings
+src/content/trainings/fr/<slug>.md # FR trainings
 ```
 
 Project frontmatter: `title`, `description`, `docsUrl`, `order` (integer for sorting)
 Blog frontmatter: `title`, `date` (ISO 8601), `description`, `tags` (string array)
+Training frontmatter: `title`, `description`, `topic`, `docsUrl`, `order` (integer for sorting)
 
 ## Content Collections config
 Defined in `src/content.config.ts` (Astro v6 format — uses `glob` loaders, not `type: 'content'`).

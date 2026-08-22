@@ -10,38 +10,39 @@ const label = lang === 'fr'
   ? { cmd: '❯ ls -la ./projets/', empty: 'Aucun projet pour le moment.' }
   : { cmd: '❯ ls -la ./projects/', empty: 'No projects yet.' };
 
-const projects = (await getCollection('projects'))
+const collectionId = lang === 'fr' ? 'projects-fr' : 'projects-en';
+const projects = (await getCollection(collectionId))
   .sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section class="mb-14">
-  <p class="text-xs text-neutral-500 mb-3">
-    <span class="text-neutral-600">~/darko</span>
-    <span class="text-amber-600 ml-1">{label.cmd}</span>
+  <p class="text-xs text-mchiato-overlay1 mb-3">
+    <span class="text-mchiato-overlay0">~/darko</span>
+    <span class="text-mchiato-peach ml-1">{label.cmd}</span>
   </p>
 
   {projects.length === 0 && (
-    <p class="text-sm text-neutral-400 pl-2">{label.empty}</p>
+    <p class="text-sm text-mchiato-overlay1 pl-2">{label.empty}</p>
   )}
 
-  <ul class="divide-y divide-neutral-100 dark:divide-neutral-800">
+  <ul class="divide-y divide-mchiato-surface0">
     {projects.map(project => (
       <li>
         <a href={project.data.docsUrl}
            target="_blank"
            rel="noopener"
            class="flex items-baseline gap-3 py-2 group hover:pl-2 transition-all duration-150">
-          <span class="text-xs text-neutral-400 dark:text-neutral-600 min-w-[90px] shrink-0">
+          <span class="text-xs text-mchiato-overlay0 min-w-[90px] shrink-0">
             drwxr-xr-x
           </span>
-          <span class="text-sm text-amber-500 group-hover:text-amber-600 transition-colors flex-1">
+          <span class="text-sm text-mchiato-peach group-hover:opacity-80 transition-opacity flex-1">
             {project.data.title}/
           </span>
-          <span class="text-xs text-neutral-400 dark:text-neutral-500 shrink-0">
+          <span class="text-xs text-mchiato-overlay1 shrink-0">
             docs ↗
           </span>
         </a>
-        <p class="text-xs text-neutral-500 pl-[102px] pb-2 leading-relaxed">
+        <p class="text-xs text-mchiato-subtext0 pl-[102px] pb-2 leading-relaxed">
           {project.data.description}
         </p>
       </li>

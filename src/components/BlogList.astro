@@ -5,17 +5,18 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 interface Props {
   lang: 'en' | 'fr';
   limit?: number;
+  full?: boolean;
 }
-const { lang, limit = 5 } = Astro.props;
+const { lang, limit = 5, full = false } = Astro.props;
 
 const collectionId = lang === 'fr' ? 'blog-fr' : 'blog-en';
 const label = lang === 'fr'
-  ? { cmd: `❯ tail -n ${limit} blog.log`, all: 'voir tous les articles →' }
-  : { cmd: `❯ tail -n ${limit} blog.log`, all: 'all posts →' };
+  ? { cmd: full ? '❯ cat blog.log' : `❯ tail -n ${limit} blog.log`, all: 'voir tous les articles →' }
+  : { cmd: full ? '❯ cat blog.log' : `❯ tail -n ${limit} blog.log`, all: 'all posts →' };
 
-const posts = (await getCollection(collectionId))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, limit);
+const allPosts = (await getCollection(collectionId))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const posts = full ? allPosts : allPosts.slice(0, limit);
 
 function formatDate(d: Date) {
   return d.toISOString().slice(0, 10);
@@ -23,29 +24,32 @@ function formatDate(d: Date) {
 ---
 
 <section class="mb-14">
-  <p class="text-xs text-neutral-500 mb-3">
-    <span class="text-neutral-600">~/darko</span>
-    <span class="text-amber-600 ml-1">{label.cmd}</span>
+  <p class="text-xs text-mchiato-overlay1 mb-3">
+    <span class="text-mchiato-overlay0">~/darko</span>
+    <span class="text-mchiato-peach ml-1">{label.cmd}</span>
   </p>
 
-  <ul class="divide-y divide-neutral-100 dark:divide-neutral-800">
+  <ul class="divide-y divide-mchiato-surface0">
     {posts.map(post => (
       <li>
         <a href={getRelativeLocaleUrl(lang, `/blog/${post.id}/`)}
            class="flex flex-col gap-0.5 py-2.5 group hover:pl-2 transition-all duration-150">
-          <span class="text-xs text-neutral-400 dark:text-neutral-500">
+          <span class="text-xs text-mchiato-overlay1">
             [{formatDate(post.data.date)}]
           </span>
-          <span class="text-sm text-neutral-700 dark:text-neutral-300 group-hover:text-amber-600 transition-colors leading-snug">
+          <span class="text-sm text-mchiato-subtext1 group-hover:text-mchiato-peach transition-colors leading-snug">
             {post.data.title}
           </span>
+          {full && <span class="text-xs text-mchiato-overlay1">{post.data.description}</span>}
         </a>
       </li>
     ))}
   </ul>
 
-  <a href={getRelativeLocaleUrl(lang, '/blog/')}
-     class="inline-block mt-3 text-xs text-neutral-500 hover:text-amber-600 transition-colors">
-    {label.all}
-  </a>
+  {!full && (
+    <a href={getRelativeLocaleUrl(lang, '/blog/')}
+       class="inline-block mt-3 text-xs text-mchiato-subtext0 hover:text-mchiato-peach transition-colors">
+      {label.all}
+    </a>
+  )}
 </section>

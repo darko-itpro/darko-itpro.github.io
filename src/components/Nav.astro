@@ -17,34 +17,34 @@ const toggleUrl  = getRelativeLocaleUrl(otherLocale, barePath);
 const links = NAV_LINKS[lang];
 ---
 
-<header class="border-b border-neutral-200 dark:border-neutral-800">
+<header class="border-b border-mchiato-surface0">
   <nav class="max-w-3xl mx-auto px-6 py-3 flex items-center gap-6">
 
     <a href={getRelativeLocaleUrl(lang, '/')}
-       class="text-amber-600 text-sm font-medium hover:text-amber-500 transition-colors">
+       class="text-mchiato-peach text-sm font-medium hover:opacity-80 transition-opacity">
       ~/darko
     </a>
 
     <div class="flex gap-5 ml-auto items-center">
       {links.map(link => (
         <a href={link.href}
-           class="text-xs text-neutral-500 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-500 transition-colors">
-          {link.label}
+           class="text-xs text-mchiato-overlay1 hover:text-mchiato-peach transition-colors">
+          {link.href.startsWith('http') && '↗ '}{link.label}
         </a>
       ))}
 
       <!-- Language toggle -->
-      <div class="flex items-center gap-1 ml-2 pl-4 border-l border-neutral-200 dark:border-neutral-800">
+      <div class="flex items-center gap-1 ml-2 pl-4 border-l border-mchiato-surface0">
         {lang === 'en' ? (
-          <span class="text-xs text-amber-600 font-medium">EN</span>
+          <span class="text-xs text-mchiato-peach font-medium">EN</span>
         ) : (
-          <a href={toggleUrl} class="text-xs text-neutral-400 hover:text-amber-600 transition-colors">EN</a>
+          <a href={toggleUrl} class="text-xs text-mchiato-overlay1 hover:text-mchiato-peach transition-colors">EN</a>
         )}
-        <span class="text-neutral-300 dark:text-neutral-700 text-xs">|</span>
+        <span class="text-mchiato-overlay0 text-xs">|</span>
         {lang === 'fr' ? (
-          <span class="text-xs text-amber-600 font-medium">FR</span>
+          <span class="text-xs text-mchiato-peach font-medium">FR</span>
         ) : (
-          <a href={toggleUrl} class="text-xs text-neutral-400 hover:text-amber-600 transition-colors">FR</a>
+          <a href={toggleUrl} class="text-xs text-mchiato-overlay1 hover:text-mchiato-peach transition-colors">FR</a>
         )}
       </div>
     </div>

@@ -18,15 +18,25 @@ export const BIO = {
   },
 };
 
+export const TRAINING_TOPICS = ['python-fundamentals', 'python-advanced', 'data-science'];
+
+export const TRAINING_TOPIC_LABELS: Record<string, { en: string; fr: string }> = {
+  'python-fundamentals': { en: 'Python Fundamentals', fr: 'Python, les bases' },
+  'python-advanced': { en: 'Python, advanced', fr: 'Python, avancé'},
+  'data-science':        { en: 'Data Science',        fr: 'Data Science' },
+};
+
 export const NAV_LINKS = {
   en: [
     { label: './projects', href: 'https://github.com/darko-itpro' },
     { label: './blog',     href: '/blog/' },
+    { label: './trainings', href: '/trainings/' },
     { label: './.taverne_invisible (🇫🇷)',  href: 'https://taverneinvisible.net' },
   ],
   fr: [
     { label: './projets', href: 'https://github.com/darko-itpro' },
     { label: './blog',    href: '/fr/blog/' },
+    { label: './formations', href: '/fr/trainings/' },
     { label: './.taverne_invisible',  href: 'https://taverneinvisible.net' },
   ],
 };
